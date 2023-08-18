@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { OrderEntity } from '../entities/order.entity';
 
 export abstract class PharmacyIntegration {
   constructor(public name: string) {}
@@ -20,7 +19,3 @@ export abstract class PharmacyIntegration {
     return response.data;
   }
 }
-
-// export interface IPharmacyIntegration extends PharmacyIntegration {
-//   createOrder<T>(): Promise<T>;
-// }
