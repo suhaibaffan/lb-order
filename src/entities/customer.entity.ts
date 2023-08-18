@@ -5,6 +5,6 @@ export interface CustomerEntity extends InMemoryDBEntity {
   address: string;
   city: string;
   state: string;
-  zipcode: number;
+  zipcode: string;
   country: string;
 }

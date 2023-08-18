@@ -15,10 +15,10 @@ export class OrdersService {
   }
 
   async createOrder(order: OrderEntity): Promise<OrderEntity> {
-    const pharmacies =
-      await this.apiService.getAvailablePharmacyIntegrationNames();
-
-    console.log(pharmacies);
     return this.ordersRepo.create(order);
+  }
+
+  async updateOrder(order: OrderEntity) {
+    await this.ordersRepo.update(order);
   }
 }

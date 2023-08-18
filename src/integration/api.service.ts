@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import axios, { AxiosResponse } from 'axios';
-import { PharmacyResponse } from 'src/interfaces/pharmacy.dto';
+import axios from 'axios';
+import { PharmacyResponse } from '../interfaces/pharmacy.dto';
 
 @Injectable()
 export class ApiService {

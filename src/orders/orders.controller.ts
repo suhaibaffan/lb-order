@@ -7,9 +7,10 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { OrderEntity } from 'src/entities/order.entity';
-import { ApiService } from 'src/integration/api.service';
-import { PharmacyIntegrationType } from 'src/interfaces/pharmacy.dto';
+import { OrderEntity } from '../entities/order.entity';
+import { ApiService } from '../integration/api.service';
+import { PharmacyIntegrationType } from '../interfaces/pharmacy.dto';
+import { CareplusService } from 'src/integration/careplus/careplus.service';
 
 @Controller('orders')
 export class OrdersController {
@@ -38,7 +39,19 @@ export class OrdersController {
     if (!availablePharmacies.includes(type)) {
       throw new HttpException('Unsupported pharmacy', 400);
     }
-    return this.ordersService.createOrder(order);
+    const savedOrder = await this.ordersService.createOrder({ ...order, type });
+
+    if (type === PharmacyIntegrationType.CAREPLUS) {
+      const careplusIntegration = new CareplusService(savedOrder);
+      const careplus = await careplusIntegration.createOrder();
+      console.log(careplus);
+      savedOrder.orderId = careplus.carePlusId;
+    }
+    // switch (type) {
+    // case PharmacyIntegrationType.CAREPLUS:
+    // }
+    await this.ordersService.updateOrder(savedOrder);
+    return savedOrder;
   }
 
   @Get('healthz')
