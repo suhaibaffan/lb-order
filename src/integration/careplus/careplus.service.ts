@@ -9,7 +9,6 @@ export class CareplusService extends PharmacyIntegration {
   constructor(orderPayload: OrderEntity) {
     super(PharmacyIntegrationType.CAREPLUS);
     this.order = {
-      carePlusId: '',
       carePlusProduct: orderPayload.product,
       carePlusQuantity: orderPayload.quantity,
       carePlusClientInfo: {
@@ -31,7 +30,6 @@ export class CareplusService extends PharmacyIntegration {
       },
     );
 
-    console.log(response.data);
     return response.data;
   }
 }

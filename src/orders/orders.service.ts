@@ -14,6 +14,10 @@ export class OrdersService {
     return this.ordersRepo.getAll();
   }
 
+  async getOrder(orderId: string): Promise<OrderEntity> {
+    return this.ordersRepo.get(orderId);
+  }
+
   async createOrder(order: OrderEntity): Promise<OrderEntity> {
     return this.ordersRepo.create(order);
   }

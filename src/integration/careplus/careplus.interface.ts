@@ -1,7 +1,5 @@
-import { PharmacyIntegrationType } from '../../interfaces/pharmacy.dto';
-
 export interface ICareplus {
-  carePlusId: string; // this is the integration order id.
+  carePlusId?: string; // this is the integration order id.
   carePlusProduct: string;
   carePlusQuantity: number;
   carePlusClientInfo: ICareplusClient;
