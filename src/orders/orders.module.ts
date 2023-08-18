@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { InMemoryDBModule } from '@nestjs-addons/in-memory-db';
-import { ApiService } from 'src/integration/api.service';
+import { ApiService } from '../integration/api.service';
 
 @Module({
   imports: [ConfigModule.forRoot(), InMemoryDBModule.forRoot({})],
