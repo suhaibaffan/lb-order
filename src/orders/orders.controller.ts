@@ -12,6 +12,7 @@ import { ApiService } from '../integration/api.service';
 import { PharmacyIntegrationType } from '../interfaces/pharmacy.dto';
 import { CareplusService } from '../integration/careplus/careplus.service';
 import { HealthmartService } from '../integration/healthmart/healthmart.service';
+import { QuickcareService } from '../integration/quickcare/quickcare.service';
 
 @Controller('orders')
 export class OrdersController {
@@ -54,6 +55,13 @@ export class OrdersController {
       const healthmart = await healthmartIntegration.createOrder();
 
       savedOrder.orderId = healthmart.healthMartId;
+    }
+
+    if (type === PharmacyIntegrationType.QUICKCARE) {
+      const quickcareIntegration = new QuickcareService(savedOrder);
+      const quickcare = await quickcareIntegration.createOrder();
+
+      savedOrder.orderId = quickcare.quickCareId;
     }
 
     await this.ordersService.updateOrder(savedOrder);
